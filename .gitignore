@@ -1,7 +1,39 @@
-.venv/
+# Python cache files
 __pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter Notebook checkpoints
 .ipynb_checkpoints/
-*.pyc
+
+# macOS system files
 .DS_Store
+
+# Environment variables
 .env
+.env.*
+
+# IDE settings
 .vscode/
+.idea/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+
+# Coverage files
+.coverage
+htmlcov/
