@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Customer Churn Prediction</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="page-container">
+
+        <div class="header">
+
+            <h1>Customer Churn Prediction</h1>
+
+            <p>
+                AI-powered customer churn risk prediction system
+            </p>
+
+        </div>
+
+
+        <div class="main-card">
+
+            <form method="POST">
+
+                <h2>Customer Information</h2>
+
+
+                <div class="form-grid">
+
+
+                    <!-- Gender -->
+
+                    <div class="form-group">
+
+                        <label>Gender</label>
+
+                        <select name="Gender" required>
+
+                            <option value="">Select Gender</option>
+
+                            <option value="Male">Male</option>
+
+                            <option value="Female">Female</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Age -->
+
+                    <div class="form-group">
+
+                        <label>Age</label>
+
+                        <input
+                            type="number"
+                            name="Age"
+                            min="18"
+                            max="100"
+                            placeholder="Enter age"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Senior Citizen -->
+
+                    <div class="form-group">
+
+                        <label>Senior Citizen</label>
+
+                        <select
+                            name="SeniorCitizen"
+                            required
+                        >
+
+                            <option value="">Select Option</option>
+
+                            <option value="0">No</option>
+
+                            <option value="1">Yes</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Partner -->
+
+                    <div class="form-group">
+
+                        <label>Partner</label>
+
+                        <select name="Partner" required>
+
+                            <option value="">Select Option</option>
+
+                            <option value="Yes">Yes</option>
+
+                            <option value="No">No</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Dependents -->
+
+                    <div class="form-group">
+
+                        <label>Dependents</label>
+
+                        <select name="Dependents" required>
+
+                            <option value="">Select Option</option>
+
+                            <option value="Yes">Yes</option>
+
+                            <option value="No">No</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Tenure -->
+
+                    <div class="form-group">
+
+                        <label>Tenure (Months)</label>
+
+                        <input
+                            type="number"
+                            name="TenureMonths"
+                            min="0"
+                            max="72"
+                            placeholder="Customer tenure"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Phone Service -->
+
+                    <div class="form-group">
+
+                        <label>Phone Service</label>
+
+                        <select name="PhoneService" required>
+
+                            <option value="">Select Option</option>
+
+                            <option value="Yes">Yes</option>
+
+                            <option value="No">No</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Internet Service -->
+
+                    <div class="form-group">
+
+                        <label>Internet Service</label>
+
+                        <select name="InternetService" required>
+
+                            <option value="">Select Service</option>
+
+                            <option value="DSL">DSL</option>
+
+                            <option value="Fiber Optic">
+                                Fiber Optic
+                            </option>
+
+                            <option value="Unknown">
+                                No Internet Service
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Online Security -->
+
+                    <div class="form-group">
+
+                        <label>Online Security</label>
+
+                        <select name="OnlineSecurity" required>
+
+                            <option value="">Select Option</option>
+
+                            <option value="Yes">Yes</option>
+
+                            <option value="No">No</option>
+
+                            <option value="No internet service">
+                                No Internet Service
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Online Backup -->
+
+                    <div class="form-group">
+
+                        <label>Online Backup</label>
+
+                        <select name="OnlineBackup" required>
+
+                            <option value="">Select Option</option>
+
+                            <option value="Yes">Yes</option>
+
+                            <option value="No">No</option>
+
+                            <option value="No internet service">
+                                No Internet Service
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Device Protection -->
+
+                    <div class="form-group">
+
+                        <label>Device Protection</label>
+
+                        <select name="DeviceProtection" required>
+
+                            <option value="">Select Option</option>
+
+                            <option value="Yes">Yes</option>
+
+                            <option value="No">No</option>
+
+                            <option value="No internet service">
+                                No Internet Service
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Tech Support -->
+
+                    <div class="form-group">
+
+                        <label>Tech Support</label>
+
+                        <select name="TechSupport" required>
+
+                            <option value="">Select Option</option>
+
+                            <option value="Yes">Yes</option>
+
+                            <option value="No">No</option>
+
+                            <option value="No internet service">
+                                No Internet Service
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Streaming TV -->
+
+                    <div class="form-group">
+
+                        <label>Streaming TV</label>
+
+                        <select name="StreamingTV" required>
+
+                            <option value="">Select Option</option>
+
+                            <option value="Yes">Yes</option>
+
+                            <option value="No">No</option>
+
+                            <option value="No internet service">
+                                No Internet Service
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Streaming Movies -->
+
+                    <div class="form-group">
+
+                        <label>Streaming Movies</label>
+
+                        <select name="StreamingMovies" required>
+
+                            <option value="">Select Option</option>
+
+                            <option value="Yes">Yes</option>
+
+                            <option value="No">No</option>
+
+                            <option value="No internet service">
+                                No Internet Service
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Contract -->
+
+                    <div class="form-group">
+
+                        <label>Contract</label>
+
+                        <select name="Contract" required>
+
+                            <option value="">Select Contract</option>
+
+                            <option value="Month-to-month">
+                                Month-to-month
+                            </option>
+
+                            <option value="One year">
+                                One Year
+                            </option>
+
+                            <option value="Two year">
+                                Two Year
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Payment Method -->
+
+                    <div class="form-group">
+
+                        <label>Payment Method</label>
+
+                        <select name="PaymentMethod" required>
+
+                            <option value="">Select Method</option>
+
+                            <option value="Credit Card">
+                                Credit Card
+                            </option>
+
+                            <option value="Electronic Check">
+                                Electronic Check
+                            </option>
+
+                            <option value="Mailed Check">
+                                Mailed Check
+                            </option>
+
+                            <option value="Bank Transfer">
+                                Bank Transfer
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Monthly Charges -->
+
+                    <div class="form-group">
+
+                        <label>Monthly Charges</label>
+
+                        <input
+                            type="number"
+                            name="MonthlyCharges"
+                            step="0.01"
+                            min="0"
+                            placeholder="Monthly charges"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Total Charges -->
+
+                    <div class="form-group">
+
+                        <label>Total Charges</label>
+
+                        <input
+                            type="number"
+                            name="TotalCharges"
+                            step="0.01"
+                            min="0"
+                            placeholder="Total charges"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Support Tickets -->
+
+                    <div class="form-group">
+
+                        <label>Support Tickets</label>
+
+                        <input
+                            type="number"
+                            name="SupportTickets"
+                            min="0"
+                            placeholder="Number of tickets"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Satisfaction Score -->
+
+                    <div class="form-group">
+
+                        <label>Satisfaction Score (1 - 5)</label>
+
+                        <input
+                            type="number"
+                            name="SatisfactionScore"
+                            min="1"
+                            max="5"
+                            placeholder="Score"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Average Monthly Spend -->
+
+                    <div class="form-group full-width">
+
+                        <label>Average Monthly Spend</label>
+
+                        <input
+                            type="number"
+                            name="AverageMonthlySpend"
+                            step="0.01"
+                            min="0"
+                            placeholder="Average monthly spend"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="predict-button"
+                >
+
+                    Predict Customer Churn
+
+                </button>
+
+            </form>
+
+
+            {% if result %}
+
+<div
+    id="prediction-result"
+    class="result-card
+    {% if result.risk_level == 'HIGH RISK' %}
+        high-risk
+    {% elif result.risk_level == 'MEDIUM RISK' %}
+        medium-risk
+    {% else %}
+        low-risk
+    {% endif %}
+    "
+>
+
+    <h2>Prediction Result</h2>
+
+    {% if result.prediction == 'CHURN' %}
+
+        <div class="status-icon churn-icon">
+            !
+        </div>
+
+        <div class="prediction churn-prediction">
+            CUSTOMER LIKELY TO CHURN
+        </div>
+
+    {% else %}
+
+        <div class="status-icon safe-icon">
+            ✓
+        </div>
+
+        <div class="prediction safe-prediction">
+            CUSTOMER LIKELY TO STAY
+        </div>
+
+    {% endif %}
+
+
+    <div class="probability-box">
+
+        <span>Churn Probability</span>
+
+        <strong>
+            {{ result.churn_probability }}%
+        </strong>
+
+    </div>
+
+
+    <div class="risk-container">
+
+        <span>Risk Level</span>
+
+        <div
+            class="risk-badge
+            {% if result.risk_level == 'HIGH RISK' %}
+                high-risk-badge
+            {% elif result.risk_level == 'MEDIUM RISK' %}
+                medium-risk-badge
+            {% else %}
+                low-risk-badge
+            {% endif %}
+            "
+        >
+
+            {{ result.risk_level }}
+
+        </div>
+
+    </div>
+
+
+    <div class="result-message">
+
+        {% if result.prediction == 'CHURN' %}
+
+            This customer shows a high probability of leaving the service.
+            Customer retention strategies and personalized offers are recommended.
+
+        {% else %}
+
+            This customer has a low probability of churn and is likely
+            to continue using the service.
+
+        {% endif %}
+
+    </div>
+
+
+    <a href="/" class="predict-again-button">
+        Predict Another Customer
+    </a>
+
+</div>
+
+
+<script>
+
+    document
+        .getElementById("prediction-result")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+</script>
+
+{% endif %}
+        </div>
+
+
+        <div class="footer">
+
+            <p>
+                Customer Churn Prediction System
+                | Machine Learning Project
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
