@@ -2,19 +2,23 @@
 
 ## Project Overview
 
-Customer churn is a major challenge for businesses, especially in the telecommunications industry. Identifying customers who are likely to leave a service can help companies take proactive retention measures and improve customer retention.
+Customer churn is a major challenge for businesses, especially in the telecommunications industry. Identifying customers who are likely to leave a service allows businesses to take proactive retention measures and improve customer loyalty.
 
-This project develops an end-to-end machine learning pipeline to predict customer churn based on customer demographics, service usage, and account-related information.
+This project develops an end-to-end machine learning system to predict customer churn using customer demographics, service usage, account information, and customer behavior.
 
 Multiple classification algorithms were trained and evaluated. The **Gradient Boosting Classifier** achieved the best overall performance and was selected as the final machine learning model.
+
+The final model is integrated into a **Flask web application** that allows users to enter customer information and receive a churn prediction, churn probability, and customer risk level.
+
+Model explainability is also implemented using **SHAP (SHapley Additive exPlanations)** to understand the factors influencing customer churn predictions.
 
 ---
 
 ## Problem Statement
 
-The objective of this project is to develop a machine learning model capable of predicting whether a customer is likely to churn.
+The objective of this project is to develop a machine learning system capable of predicting whether a customer is likely to churn.
 
-By identifying customers at risk of leaving, businesses can develop targeted retention strategies, improve customer satisfaction, and reduce customer loss.
+By identifying high-risk customers, businesses can develop targeted retention strategies, provide personalized offers, improve customer satisfaction, and reduce customer loss.
 
 ---
 
@@ -31,18 +35,39 @@ The project follows a structured end-to-end machine learning workflow:
 7. Model Evaluation
 8. Hyperparameter Tuning
 9. Model Saving
-10. Project Documentation
+10. Model Explainability using SHAP
+11. Prediction Pipeline Development
+12. Flask Web Application Development
+13. User Interface Development
+14. Project Documentation
 
 ---
 
 ## Project Structure
 
 ```text
-Customer_Churn_Prediction/
+Customer-Churn-Prediction/
+│
+├── app/
+│   ├── app.py
+│   │
+│   ├── static/
+│   │   └── style.css
+│   │
+│   └── templates/
+│       └── index.html
 │
 ├── data/
 │   ├── raw/
+│   │   └── customer_churn.csv
+│   │
 │   └── processed/
+│       ├── X_test.csv
+│       ├── X_train.csv
+│       ├── customer_churn_cleaned.csv
+│       ├── customer_churn_feature_engineered.csv
+│       ├── y_test.csv
+│       └── y_train.csv
 │
 ├── models/
 │   ├── customer_churn_model.pkl
@@ -54,7 +79,17 @@ Customer_Churn_Prediction/
 │   ├── 03_exploratory_data_analysis.ipynb
 │   ├── 04_feature_engineering.ipynb
 │   ├── 05_data_preprocessing.ipynb
-│   └── 06_model_building.ipynb
+│   ├── 06_model_building.ipynb
+│   └── 07_model_explainability.ipynb
+│
+├── reports/
+│   └── figures/
+│       ├── shap_feature_importance.png
+│       └── shap_summary_plot.png
+│
+├── src/
+│   ├── predict.py
+│   └── preprocess_input.py
 │
 ├── .gitignore
 ├── README.md
@@ -65,14 +100,39 @@ Customer_Churn_Prediction/
 
 ## Technologies Used
 
+### Programming Language
+
 - Python
+
+### Data Analysis and Visualization
+
 - Pandas
 - NumPy
 - Matplotlib
 - Seaborn
+
+### Machine Learning
+
 - Scikit-learn
+- Gradient Boosting Classifier
+- GridSearchCV
 - Joblib
+
+### Model Explainability
+
+- SHAP
+
+### Web Development
+
+- Flask
+- HTML
+- CSS
+- Jinja2
+
+### Development Tools
+
 - Jupyter Notebook
+- Visual Studio Code
 - Git
 - GitHub
 
@@ -82,7 +142,14 @@ Customer_Churn_Prediction/
 
 The dataset was initially explored to understand its structure, features, data types, missing values, and target variable.
 
-The analysis focused on customer demographic information, service usage, account-related information, and customer churn behavior.
+The analysis focused on:
+
+- Customer demographic information
+- Customer service usage
+- Account-related information
+- Customer spending behavior
+- Customer satisfaction
+- Customer churn behavior
 
 Key data understanding tasks included:
 
@@ -97,7 +164,7 @@ Key data understanding tasks included:
 
 ## Data Cleaning
 
-Data cleaning was performed to improve data quality and prepare the dataset for further analysis.
+Data cleaning was performed to improve data quality and prepare the dataset for analysis.
 
 The following tasks were carried out:
 
@@ -107,11 +174,13 @@ The following tasks were carried out:
 - Handled inconsistent values
 - Prepared a cleaned dataset for exploratory data analysis and machine learning
 
+The cleaned dataset was saved for use in subsequent project stages.
+
 ---
 
 ## Exploratory Data Analysis
 
-Exploratory Data Analysis was performed to understand customer behavior and identify patterns related to customer churn.
+Exploratory Data Analysis was performed to understand customer behavior and identify patterns associated with customer churn.
 
 The analysis included:
 
@@ -121,9 +190,10 @@ The analysis included:
 - Customer tenure analysis
 - Contract type analysis
 - Monthly charges analysis
+- Customer satisfaction analysis
 - Feature relationships and correlations
 
-Visualizations were created using **Matplotlib** and **Seaborn** to identify trends and patterns within the dataset.
+Visualizations were created using **Matplotlib** and **Seaborn** to identify important trends and patterns in the dataset.
 
 ---
 
@@ -135,15 +205,17 @@ The process included:
 
 - Transforming categorical features
 - Preparing numerical representations of categorical variables
-- Selecting relevant input features
+- Selecting relevant customer features
 - Preparing the target variable
 - Ensuring features were suitable for machine learning algorithms
+
+The feature-engineered dataset was saved for model preprocessing and training.
 
 ---
 
 ## Data Preprocessing
 
-The dataset was prepared for machine learning through the following preprocessing steps:
+The dataset was prepared for machine learning using the following preprocessing steps:
 
 - Feature and target separation
 - Categorical feature encoding
@@ -151,7 +223,7 @@ The dataset was prepared for machine learning through the following preprocessin
 - Feature scaling where required
 - Preparation of training and testing datasets
 
-These preprocessing steps ensured that the dataset was suitable for training multiple machine learning models.
+The processed datasets were saved to maintain a reproducible machine learning workflow.
 
 ---
 
@@ -199,7 +271,7 @@ After comparing the trained models, the **Gradient Boosting Classifier** was sel
 
 The Gradient Boosting model demonstrated a good balance between precision and recall.
 
-The ROC-AUC score of approximately **83.78%** indicates that the model has a strong ability to distinguish between customers who are likely to churn and customers who are likely to remain.
+The ROC-AUC score of **83.78%** indicates that the model has a strong ability to distinguish between customers who are likely to churn and customers who are likely to remain.
 
 ---
 
@@ -209,9 +281,38 @@ Hyperparameter tuning was performed on the **Gradient Boosting Classifier** to o
 
 **GridSearchCV** was used to systematically evaluate different combinations of model hyperparameters using cross-validation.
 
-The tuning process focused on identifying an optimal combination of model parameters.
+The best estimator identified during the GridSearchCV process was selected as the final optimized machine learning model.
 
-The best estimator identified during the GridSearchCV process was selected as the optimized machine learning model.
+---
+
+## Model Explainability Using SHAP
+
+Machine learning model explainability was implemented using **SHAP (SHapley Additive exPlanations)**.
+
+SHAP helps explain how different customer features influence the model's churn predictions.
+
+The explainability analysis includes:
+
+- Global feature importance analysis
+- SHAP feature importance visualization
+- SHAP summary plot
+- Analysis of features influencing customer churn
+
+Generated SHAP visualizations are stored in:
+
+```text
+reports/figures/
+```
+
+### SHAP Feature Importance
+
+![SHAP Feature Importance](reports/figures/shap_feature_importance.png)
+
+### SHAP Summary Plot
+
+![SHAP Summary Plot](reports/figures/shap_summary_plot.png)
+
+Model explainability helps businesses understand the major factors associated with customer churn instead of relying only on prediction results.
 
 ---
 
@@ -221,16 +322,72 @@ The final trained machine learning model was saved using **Joblib** for future i
 
 The following model artifacts were created:
 
-- `customer_churn_model.pkl` - Final trained machine learning model
+- `customer_churn_model.pkl` - Final trained Gradient Boosting model
 - `feature_names.pkl` - Input feature names and feature order
 
-Saving the trained model eliminates the need to retrain the machine learning model whenever predictions are required.
-
-The saved model can be integrated into a web application, API, or other prediction system in the future.
+Saving the trained model eliminates the need to retrain the model whenever a new prediction is required.
 
 ---
 
-## Installation and Setup
+## Prediction Pipeline
+
+A reusable prediction pipeline was developed inside the `src` directory.
+
+### Input Preprocessing
+
+The `preprocess_input.py` module prepares customer input data for the trained machine learning model.
+
+It ensures that:
+
+- Customer input features are correctly formatted
+- Categorical values are transformed
+- Feature columns match the training data
+- Feature order is maintained
+
+### Churn Prediction
+
+The `predict.py` module loads the trained machine learning model and performs customer churn prediction.
+
+The prediction system returns:
+
+- Customer churn prediction
+- Churn probability
+- Customer risk level
+
+Risk levels are categorized as:
+
+- LOW RISK
+- MEDIUM RISK
+- HIGH RISK
+
+---
+
+## Flask Web Application
+
+The trained machine learning model is integrated into a **Flask web application**.
+
+The application provides an interactive interface where users can enter customer information and generate churn predictions.
+
+### Application Features
+
+- Interactive customer information form
+- Real-time machine learning prediction
+- Churn probability calculation
+- Customer risk level classification
+- Professional prediction result card
+- Responsive user interface
+- Mobile-friendly design
+
+The application displays whether a customer is likely to:
+
+- CHURN
+- STAY
+
+It also displays the predicted churn probability and customer risk level.
+
+---
+
+## Running the Project
 
 Clone the repository:
 
@@ -270,13 +427,29 @@ Install the required dependencies:
 pip install -r requirements.txt
 ```
 
-Start Jupyter Notebook:
+---
+
+## Running the Flask Application
+
+Navigate to the application directory:
 
 ```bash
-jupyter notebook
+cd app
 ```
 
-Open the notebooks in numerical order to explore the complete machine learning workflow.
+Run the Flask application:
+
+```bash
+python app.py
+```
+
+Open the application in your browser:
+
+```text
+http://127.0.0.1:5000
+```
+
+Enter customer information and click **Predict Customer Churn** to generate a prediction.
 
 ---
 
@@ -296,6 +469,8 @@ Run the notebooks in the following order:
 05_data_preprocessing.ipynb
         ↓
 06_model_building.ipynb
+        ↓
+07_model_explainability.ipynb
 ```
 
 Each notebook represents a specific stage of the machine learning workflow.
@@ -304,15 +479,20 @@ Each notebook represents a specific stage of the machine learning workflow.
 
 ## Key Project Outcomes
 
-- Developed an end-to-end customer churn prediction machine learning pipeline
+- Developed an end-to-end customer churn prediction system
 - Performed data cleaning and exploratory data analysis
 - Analyzed customer behavior and churn patterns
 - Performed feature engineering and data preprocessing
-- Trained multiple classification algorithms
+- Trained seven machine learning classification algorithms
 - Compared models using multiple evaluation metrics
 - Selected Gradient Boosting as the best-performing classifier
 - Applied hyperparameter tuning using GridSearchCV
-- Saved the final trained model using Joblib
+- Achieved a ROC-AUC score of 83.78%
+- Implemented model explainability using SHAP
+- Developed reusable preprocessing and prediction modules
+- Integrated the trained model with Flask
+- Built an interactive customer churn prediction web application
+- Developed a responsive and professional user interface
 - Organized the project using a professional data science project structure
 
 ---
@@ -321,14 +501,14 @@ Each notebook represents a specific stage of the machine learning workflow.
 
 The project can be further improved by:
 
-- Handling class imbalance using advanced resampling techniques
-- Performing additional feature engineering
 - Optimizing the classification probability threshold
-- Using SHAP for model explainability
-- Developing a Flask or FastAPI prediction API
-- Building an interactive customer churn prediction interface
-- Deploying the model to a cloud platform
-- Implementing model monitoring and automated retraining
+- Applying advanced class imbalance techniques
+- Adding customer-specific SHAP explanations to the web application
+- Developing a REST API for churn prediction
+- Adding batch customer prediction using CSV uploads
+- Deploying the application to a cloud platform
+- Implementing model monitoring
+- Adding automated model retraining
 
 ---
 
@@ -336,13 +516,15 @@ The project can be further improved by:
 
 This project demonstrates a complete end-to-end machine learning workflow for customer churn prediction.
 
-The project covers data understanding, data cleaning, exploratory data analysis, feature engineering, preprocessing, machine learning model development, model evaluation, hyperparameter tuning, and model persistence.
+The project covers data understanding, data cleaning, exploratory data analysis, feature engineering, preprocessing, machine learning model development, model evaluation, hyperparameter tuning, model explainability, prediction pipeline development, and web application integration.
 
-Multiple classification algorithms were trained and evaluated. The **Gradient Boosting Classifier** was selected based on its overall performance.
+Multiple classification algorithms were trained and evaluated. The **Gradient Boosting Classifier** was selected as the final model based on its overall performance.
 
 The final model achieved an **Accuracy of 76.45%** and a **ROC-AUC score of 83.78%**, demonstrating good predictive and class discrimination performance.
 
-This project demonstrates practical skills in **Python, Data Analysis, Exploratory Data Analysis, Machine Learning, Model Evaluation, Hyperparameter Tuning, and end-to-end Data Science project development**.
+The trained machine learning model was integrated into a **Flask web application**, allowing users to enter customer information and receive churn predictions, probability scores, and customer risk levels.
+
+This project demonstrates practical skills in **Python, Data Analysis, Exploratory Data Analysis, Machine Learning, Model Evaluation, Hyperparameter Tuning, SHAP Model Explainability, Flask Web Development, and End-to-End Data Science Project Development**.
 
 ---
 
