@@ -1,39 +1,53 @@
-# Python cache files
+# ==============================
+# Python
+# ==============================
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Virtual environments
+# ==============================
+# Virtual Environment
+# ==============================
 .venv/
 venv/
 env/
+ENV/
 
-# Jupyter Notebook checkpoints
+# ==============================
+# Jupyter Notebook
+# ==============================
 .ipynb_checkpoints/
 
-# macOS system files
+# ==============================
+# macOS
+# ==============================
 .DS_Store
 
-# Environment variables
+# ==============================
+# VS Code
+# ==============================
+.vscode/
+
+# ==============================
+# Environment Variables
+# ==============================
 .env
 .env.*
 
-# IDE settings
-.vscode/
-.idea/
-
-# Logs
-*.log
-
-# Temporary files
-*.tmp
-*.temp
-
-# Python packaging
+# ==============================
+# Python Build Files
+# ==============================
 build/
 dist/
 *.egg-info/
 
-# Coverage files
-.coverage
-htmlcov/
+# ==============================
+# Logs
+# ==============================
+*.log
+
+# ==============================
+# Temporary Files
+# ==============================
+*.tmp
+*.temp
